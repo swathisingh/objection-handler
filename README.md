@@ -37,7 +37,7 @@ Built as part of my public AI learning series. I'm a Solutions Engineer in adtec
 ### 1. Fork & enable GitHub Pages
 1. Fork this repo
 2. Go to **Settings → Pages → Source: main branch / root**
-3. Live at `https://YOUR_USERNAME.github.io/objection-iq`
+3. Live at `https://swathisingh.github.io/objection-handler`
 
 ### 2. Deploy Cloudflare Worker
 1. Free account at [workers.cloudflare.com](https://workers.cloudflare.com)
