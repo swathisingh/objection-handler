@@ -1,10 +1,10 @@
-# ObjectionIQ ⚡
+# ObjectionHandler ⚡
 
 > Turn client objections into opportunities — instantly.
 
 Type any objection you hear in a sales conversation. Get 3 response strategies back — direct, reframe, and question-based — tailored to the deal stage and stakeholder.
 
-**Live demo →** https://YOUR_USERNAME.github.io/objection-iq
+**Live demo →** https://swathisingh.github.io/objection-handler
 
 ---
 
@@ -66,4 +66,4 @@ MIT — fork it, adapt it, make it yours.
 
 ---
 
-*Built by [@YourName](https://linkedin.com/in/YOUR_PROFILE) · [#MidWeekDump](https://linkedin.com)*
+*Built by [swathi singh](https://linkedin.com/in/swathi-singh) · [#MidWeekDump](https://linkedin.com)*
