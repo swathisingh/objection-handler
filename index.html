@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ObjectionIQ — AI Objection Handler for SE & Pre-Sales</title>
+  <meta name="description" content="Type any client objection. Get 3 sharp, ready-to-use responses — direct, reframe, and question-based. Built for Solutions Engineers and pre-sales teams." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="nav-brand">
+        <div class="brand-icon">O<span>IQ</span></div>
+        <span class="brand-name">ObjectionIQ</span>
+      </div>
+      <div class="nav-right">
+        <a href="https://github.com/swathisingh/objection-handler" target="_blank" class="nav-gh">GitHub ↗</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="eyebrow">#MidWeekDump · Experiment 02</div>
+      <h1>Turn objections<br>into <em>opportunities.</em></h1>
+      <p class="hero-sub">Type any client objection you hear in a deal. Get 3 battle-tested response angles — direct, reframe, and question-based — in seconds.</p>
+      <div class="hero-tags">
+        <span class="htag">Solutions Engineers</span>
+        <span class="htag">Pre-Sales</span>
+        <span class="htag">Account Executives</span>
+      </div>
+    </div>
+    <div class="hero-demo" aria-hidden="true">
+      <div class="demo-bubble in">"We already have a solution for this."</div>
+      <div class="demo-arrow">↓</div>
+      <div class="demo-responses">
+        <div class="demo-resp r1"><span class="resp-label">Direct</span> That's great context — what's working well and what gaps are you still working around?</div>
+        <div class="demo-resp r2"><span class="resp-label">Reframe</span> Most teams we work with said the same thing before seeing what they were leaving on the table.</div>
+        <div class="demo-resp r3"><span class="resp-label">Question</span> How long have you had it, and what does success look like with that tool?</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN APP -->
+  <section class="app-section" id="app">
+    <div class="app-inner">
+
+      <!-- PROXY SETUP -->
+      <div id="setup-screen" class="setup-screen">
+        <div class="setup-card">
+          <div class="setup-icon">⚙</div>
+          <h3>Connect your API proxy</h3>
+          <p>ObjectionIQ uses a Cloudflare Worker to call Claude securely. Paste your worker URL below — stored only in your browser. <a href="https://github.com/swathisingh/objection-handler#setup" target="_blank">Setup guide →</a></p>
+          <div class="setup-row">
+            <input type="url" id="proxy-input" placeholder="https://your-worker.workers.dev" />
+            <button onclick="saveProxy()" class="btn-primary">Save & start</button>
+          </div>
+          <p class="setup-note">Your API key never touches this page — it lives only in your Worker.</p>
+        </div>
+      </div>
+
+      <!-- MAIN TOOL -->
+      <div id="tool-screen" style="display:none;">
+        <div class="tool-layout">
+
+          <!-- LEFT: INPUT -->
+          <div class="input-panel">
+            <div class="panel-label">The objection</div>
+            <textarea id="objection-input" placeholder="e.g. Your pricing is too high for our budget right now..." rows="5"></textarea>
+
+            <div class="context-row">
+              <div class="context-group">
+                <label>Deal stage</label>
+                <select id="deal-stage">
+                  <option value="discovery">Discovery</option>
+                  <option value="demo">Demo / evaluation</option>
+                  <option value="proposal">Proposal / pricing</option>
+                  <option value="closing">Closing</option>
+                </select>
+              </div>
+              <div class="context-group">
+                <label>Stakeholder</label>
+                <select id="stakeholder">
+                  <option value="economic buyer">Economic buyer</option>
+                  <option value="technical evaluator">Technical evaluator</option>
+                  <option value="end user">End user</option>
+                  <option value="champion">Internal champion</option>
+                </select>
+              </div>
+            </div>
+
+            <button id="generate-btn" onclick="handleGenerate()" class="btn-generate">
+              <span id="btn-text">Generate responses</span>
+              <span id="btn-arrow">→</span>
+            </button>
+
+            <div class="history-section" id="history-section" style="display:none;">
+              <div class="history-label">Recent objections</div>
+              <div id="history-list"></div>
+            </div>
+          </div>
+
+          <!-- RIGHT: OUTPUT -->
+          <div class="output-panel" id="output-panel">
+            <div class="output-empty" id="output-empty">
+              <div class="empty-graphic">
+                <div class="eq-bar" style="height:32px;animation-delay:0s"></div>
+                <div class="eq-bar" style="height:48px;animation-delay:0.15s"></div>
+                <div class="eq-bar" style="height:24px;animation-delay:0.3s"></div>
+                <div class="eq-bar" style="height:56px;animation-delay:0.45s"></div>
+                <div class="eq-bar" style="height:36px;animation-delay:0.6s"></div>
+              </div>
+              <p>Your responses will appear here.</p>
+              <p class="muted">Type an objection and hit generate.</p>
+            </div>
+            <div id="output-content" style="display:none;"></div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-section">
+    <div class="how-inner">
+      <h2>Built for how SE conversations actually work</h2>
+      <div class="how-grid">
+        <div class="how-card">
+          <div class="how-num">01</div>
+          <strong>Direct response</strong>
+          <p>Address the objection head-on with confidence. No fluff, no deflection.</p>
+        </div>
+        <div class="how-card">
+          <div class="how-num">02</div>
+          <strong>Reframe</strong>
+          <p>Shift the perspective — help the prospect see their concern from a different angle.</p>
+        </div>
+        <div class="how-card">
+          <div class="how-num">03</div>
+          <strong>Question-based</strong>
+          <p>Dig deeper with a question that uncovers the real concern behind the objection.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <p>Built by <a href="https://www.linkedin.com/in/swathi-singh/" target="_blank">@YourName</a> · Part of <strong>#MidWeekDump</strong></p>
+      <p class="muted">Posts you enter are sent to Claude (Anthropic) to generate responses. Nothing is stored on any server. <a href="https://github.com/swathisingh/objection-handler" target="_blank">View source →</a></p>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
