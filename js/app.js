@@ -104,7 +104,15 @@ async function handleGenerate() {
 
     let parsed;
     try { parsed = JSON.parse(clean); }
-    catch { throw new Error('Could not parse response. Try again.'); }
+    catch {
+      const match = clean.match(/\{[\s\S]*\}/);
+      if (match) {
+        try { parsed = JSON.parse(match[0]); }
+        catch { throw new Error('Could not parse response. Try again.'); }
+      } else {
+        throw new Error('Could not parse response. Try again.');
+      }
+    }
 
     addToHistory(objection);
     showResponses(parsed, objection, dealStage, stakeholder);
